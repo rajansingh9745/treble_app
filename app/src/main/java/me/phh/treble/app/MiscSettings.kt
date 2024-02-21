@@ -45,6 +45,7 @@ object MiscSettings : Settings {
     val linearBrightness = "key_misc_linear_brightness"
     val forceDisplay5g = "key_misc_force_display_5g"
     val disableVoiceCallIn = "key_misc_disable_voice_call_in"
+    val disableSfGlBackpressure = "key_misc_disable_sf_gl_backpressure"
 
     override fun enabled() = true
 }
