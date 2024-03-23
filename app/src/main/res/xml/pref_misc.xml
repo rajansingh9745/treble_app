@@ -46,12 +46,6 @@
 			android:title="Set forced/faked rounded corners diameter"
 			android:inputType="number" />
 		<ListPreference
-			android:defaultValue="1"
-			android:entries="@array/pref_misc_fps_divisor"
-			android:entryValues="@array/pref_misc_fps_divisor_values"
-			android:key="key_misc_fps_divisor"
-			android:title="FPS Divisor" />
-		<ListPreference
 			android:defaultValue="-1"
 			android:entries="@array/pref_misc_display_fps"
 			android:entryValues="@array/pref_misc_display_fps_values"
