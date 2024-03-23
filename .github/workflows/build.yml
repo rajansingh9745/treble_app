@@ -16,7 +16,7 @@ jobs:
       with:
         distribution: "temurin"
         java-version: "17"
-    
+
     - name: Get latest commit hash
       id: latest_commit
       run: echo "hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
@@ -41,5 +41,5 @@ jobs:
         git checkout pie
         cp ../TrebleApp.apk TrebleApp/app.apk
         git add TrebleApp/app.apk
-        git commit -m "Up TrebleApp to ${{ steps.latest_commit.outputs.hash }}"
-        git push origin pie
+        git commit -m "Up TrebleApp to TrebleDroid/treble_app@${{ steps.latest_commit.outputs.hash }}"
+        git push origin pie || true
