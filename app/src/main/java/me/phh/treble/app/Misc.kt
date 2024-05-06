@@ -201,7 +201,7 @@ object Misc: EntryStartup {
             }
             MiscSettings.dynamicFps -> {
                 val value = sp.getBoolean(key, false)
-                SystemProperties.set("persist.sys.phh.dynamic_fps", if (value) "true" else "false")
+                SystemProperties.set("persist.sys.phh.dynamic_fps", if (value) "1" else "0")
             }
             MiscSettings.remotectl -> {
                 val value = sp.getBoolean(key, false)
