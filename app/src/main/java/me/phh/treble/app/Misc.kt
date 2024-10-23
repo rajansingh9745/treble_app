@@ -13,6 +13,7 @@ import android.util.Log
 import java.lang.ref.WeakReference
 
 import vendor.ims.zenmotion.V1_0.IZenMotion;
+import vendor.xiaomi.hw.touchfeature.ITouchFeature
 
 @SuppressLint("StaticFieldLeak")
 object Misc: EntryStartup {
@@ -255,6 +256,16 @@ object Misc: EntryStartup {
                 val asusSvc = try { IZenMotion.getService() } catch(e: Exception) { null }
                 if(asusSvc != null) {
                     asusSvc.setDclickEnable(if(value) 1 else 0)
+                }
+                Misc.safeSetprop("persist.sys.phh.xiaomi.dt2w", if(value) "1" else "0")
+                try {
+                    val binder = android.os.Binder.allowBlocking(
+                        ServiceManager.waitForDeclaredService(ITouchFeature.DESCRIPTOR + "/default"));
+                    val instance = ITouchFeature.Stub.asInterface(binder);
+                    val ret = instance.set_mode_value(0 /*touchid*/, 14 /* TOUCH_DOUBLETAP_MODE */, if(value) 1 else 0)
+                    Log.d("PHH", "Setting xiaomi touch mode returned $ret")
+                } catch(t: Throwable) {
+                    Log.d("PHH", "Setting xiaomi touch mode failed", t)
                 }
             }
             MiscSettings.fodColor -> {
