@@ -336,6 +336,10 @@ object Misc: EntryStartup {
                 val value = sp.getString(key, "0")
                 SystemProperties.set("persist.sys.bt.esco_transport_unit_size", value)
             }
+            MiscSettings.secureAdb -> {
+                val value = sp.getBoolean(key, false)
+                SystemProperties.set("persist.sys.phh.adb_secure", if (value) "1" else "0")
+            }
         }
     }
 
