@@ -33,7 +33,7 @@ object Lid: EntryStartup {
         // Huawei Hall sensor for magnetic cover : type = 65538 - name = "HALL sensor"
         // find the first item or return null
         // type=65538 is the Huawei type for magnetic sensor (found in the EMUI9 frameworks)
-        val lidSensor = sensorManager.getSensorList(Sensor.TYPE_ALL).find { it.type == 65538 }
+        val lidSensor = sensorManager.getSensorList(Sensor.TYPE_ALL).find { it.stringType == "android.sensor.hall" }
         if(lidSensor == null) {
             Log.d("PHH", "Failed finding sensor for lid wakeup")
             for(s in sensorManager.getSensorList(Sensor.TYPE_ALL)) {
