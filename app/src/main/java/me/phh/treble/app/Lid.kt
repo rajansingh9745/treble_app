@@ -26,6 +26,35 @@ object Lid: EntryStartup {
         PowerManager::class.java.getMethod("goToSleep", Long::class.java).invoke(powerManager, SystemClock.uptimeMillis())
     }
 
+    fun huawei(ctxt: Context) {
+        val sensorManager = ctxt.getSystemService(SensorManager::class.java)
+        // Huawei Hall sensor for magnetic cover : ID = 65538
+        val sensors = listOf("HALL sensor")
+        val lidSensor = sensorManager.getSensorList(Sensor.TYPE_ALL).firstOrNull() { sensor -> sensors.any { name -> sensor.name.contains(name)}}
+        if(lidSensor == null) {
+            Log.d("PHH", "Failed finding sensor for lid wakeup")
+            for(s in sensorManager.getSensorList(Sensor.TYPE_ALL)) {
+                Log.d("PHH", " - '${s.name}'")
+            }
+        }
+        Log.d("PHH", "Found lid sensor $lidSensor")
+
+        sensorManager.registerListener(object: SensorEventListener {
+            override fun onSensorChanged(p0: SensorEvent) {
+                Log.d("PHH", "Received LID event $p0")
+                Log.d("PHH", "Lid value is ${p0.values[0]}, ${p0.values[0] == 0.0f}, ${p0.values[0] == 1.0f}")
+
+                if(p0.values[0] == 0.0f) { // Lid is opening, wakeup
+                    waky(ctxt)
+                } else if(p0.values[0] == 1.0f) { // Lid is closing, sleeping
+                    sleepy(ctxt)
+                }
+            }
+
+            override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
+            }
+        }, lidSensor, 1000*1000)
+    }
     fun lenovo(ctxt: Context) {
         val sensorManager = ctxt.getSystemService(SensorManager::class.java)
         val sensors = listOf("ah1902 Hall Effect Sensor Wakeup", "bu52053nvx Hall Effect Sensor Wakeup", "mmc56x3x Hall Effect Sensor Wakeup")
@@ -85,14 +114,22 @@ object Lid: EntryStartup {
     }
 
     override fun startup(ctxt: Context) {
+        Log.d("PHH", "LID vendorFpLow = " + Tools.vendorFpLow)
         if(Tools.vendorFpLow.startsWith("Lenovo/TB-9707F_PRC/TB-9707F".lowercase()) ||
-                Tools.vendorFpLow.startsWith("Lenovo/LenovoTB-J716F_PRC/J716F".lowercase()) ||
-                Tools.vendorFpLow.startsWith("Lenovo/TB320FC".lowercase())
-                ) {
+            Tools.vendorFpLow.startsWith("Lenovo/LenovoTB-J716F_PRC/J716F".lowercase()) ||
+            Tools.vendorFpLow.startsWith("Lenovo/TB320FC".lowercase())
+        ) {
             lenovo(ctxt)
         }
         if(Tools.vendorFpLow.startsWith("Cat/S22FLIP/S22FLIP".lowercase())) {
             cat(ctxt)
+        }
+        if(Tools.vendorFpLow.startsWith("hi6250".lowercase()) ||
+            Tools.vendorFpLow.startsWith("kirin710".lowercase()) ||
+            Tools.vendorFpLow.startsWith("kirin970".lowercase()) ||
+            Tools.vendorFpLow.startsWith("hi3660".lowercase())
+            ) {
+            huawei(ctxt)
         }
     }
 }
