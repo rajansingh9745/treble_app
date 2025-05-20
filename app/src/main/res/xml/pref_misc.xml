@@ -33,18 +33,56 @@
             android:key="key_misc_disable_fast_audio"
             android:title="Disable fast audio" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="Display">
+    <PreferenceCategory android:title="User interface">
         <EditTextPreference
             android:defaultValue="-1"
             android:key="key_misc_rounded_corners"
             android:title="Set rounded corners diameter"
             android:inputType="number"
             android:summary="Requires a reboot" />
+		<EditTextPreference
+			android:defaultValue="-1"
+			android:key="key_misc_sb_padding_top"
+			android:title="Set status bar top padding"
+			android:inputType="number"
+			android:summary="Requires a SystemUI restart" />
+		<EditTextPreference
+			android:defaultValue="-1"
+			android:key="key_misc_sb_padding_start"
+			android:title="Set status bar start padding"
+			android:inputType="number"
+			android:summary="Requires a SystemUI restart" />
+		<EditTextPreference
+			android:defaultValue="-1"
+			android:key="key_misc_sb_padding_end"
+			android:title="Set status bar end padding"
+			android:inputType="number"
+			android:summary="Requires a SystemUI restart" />
         <EditTextPreference
-            android:defaultValue="-1"
-            android:key="key_misc_rounded_corners_overlay"
-            android:title="Set forced/faked rounded corners diameter"
-            android:inputType="number" />
+			android:defaultValue="-1"
+			android:key="key_misc_sb_padding_bottom"
+			android:title="Set status bar bottom padding"
+			android:inputType="number"
+			android:summary="Requires a SystemUI restart" />
+        <EditTextPreference
+			android:defaultValue="-1"
+			android:key="key_misc_qs_clock_left_padding"
+			android:title="Set quick settings clock left padding"
+			android:inputType="number"
+			android:summary="Requires a SystemUI restart" />
+        <EditTextPreference
+			android:defaultValue="-1"
+			android:key="key_misc_qs_clock_right_padding"
+			android:title="Set quick settings clock right padding"
+			android:inputType="number"
+			android:summary="Requires a SystemUI restart" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="key_misc_brighten_screen_face_unlock"
+            android:title="Brighten screen on Face Unlock"
+            android:summary="Brightens up the display to maximum when attempting to unlock the phone. Only applicable if using Face Unlock."/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Display">
         <ListPreference
             android:defaultValue="-1"
             android:entries="@array/pref_misc_display_fps"
@@ -146,6 +184,11 @@
             android:defaultValue="true"
             android:key="key_misc_dynamic_sysbta"
             android:title="Use System Wide BT HAL" />
+        <SwitchPreference
+            android:key="key_misc_disable_le_apcfe"
+            android:defaultValue="false"
+            android:title="Disable LE APCF Extended features"
+            android:summary="Fix bluetooth crashing on some devices" />
         <ListPreference
             android:defaultValue="0"
             android:entries="@array/pref_misc_bluetooth"
@@ -179,8 +222,20 @@
             android:defaultValue="false"
             android:key="key_misc_restart_ril"
             android:title="Automatically restart RIL" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="key_misc_patch_smsc"
+            android:title="Patch SMSC"
+            android:summary="If you can't send messages, primarily on Samsung devices, turn off SMSC patching" />
         <Preference android:title="@string/remove_telephony_subsystem"
             android:key="key_misc_removetelephony" />
+        <ListPreference
+            android:defaultValue="-1"
+            android:entries="@array/pref_misc_sim_slots"
+            android:entryValues="@array/pref_misc_sim_slots_values"
+            android:key="key_misc_sim_slots"
+            android:title="Force a specific number of SIM slots"
+            android:summary="Might lead to instability of system\nRequires a reboot" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Other">
         <SwitchPreference
@@ -203,13 +258,16 @@
             android:entryValues="@array/pref_misc_fod_color_values"
             android:key="key_misc_fod_color"
             android:title="Under-display fp color" />
-        <Preference android:title="Securize"
-            android:key="key_misc_securize" />
         <SwitchPreference
             android:defaultValue="false"
             android:key="key_misc_secure_adb"
             android:title="Secure adb"
             android:summary="Computer requires approval" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="key_misc_treat_virtual_sensors_as_real"
+            android:title="Treat virtual sensors as real"
+            android:summary="Treat all virtual fingerprint sensors as real\nWarning: This can cause bootloops - use with extreme care\nRequires a reboot" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Debugging">
         <Preference android:title="Debug Sensors">

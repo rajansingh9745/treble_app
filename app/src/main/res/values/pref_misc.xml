@@ -37,6 +37,21 @@
       <item>"huawei"</item>
     </array>
 
+    <array name="pref_misc_sim_slots">
+      <item>"Don't force"</item>
+      <item>"No SIM slot"</item>
+      <item>"One SIM slot"</item>
+      <item>"Two SIM slots"</item>
+      <item>"Three SIM slots"</item>
+    </array>
+    <array name="pref_misc_sim_slots_values">
+      <item>"-1"</item>
+      <item>"0"</item>
+      <item>"1"</item>
+      <item>"2"</item>
+      <item>"3"</item>
+    </array>
+
     <array name="pref_misc_display_fps">
       <item>"Don't force"</item>
       <item>"60fps"</item>

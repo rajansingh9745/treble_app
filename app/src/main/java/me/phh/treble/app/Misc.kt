@@ -141,14 +141,9 @@ object Misc: EntryStartup {
             MiscSettings.roundedCorners -> {
                 val value = sp.getString(key, "-1").toInt()
                 if (value >= 0) {
-                    Settings.Secure.putInt(c.contentResolver, "sysui_rounded_content_padding", value)
                     SystemProperties.set("persist.sys.phh.rounded_corners_padding", value.toString())
-                }
-            }
-            MiscSettings.roundedCornersOverlay -> {
-                val value = sp.getString(key, "-1").toFloat()
-                if (value >= 0) {
-                    Settings.Secure.putFloat(c.contentResolver, "sysui_rounded_size", value)
+		} else {
+                    SystemProperties.set("persist.sys.phh.rounded_corners_padding", null)
                 }
             }
             MiscSettings.disableButtonsBacklight -> {
@@ -184,6 +179,10 @@ object Misc: EntryStartup {
                         SystemProperties.set("persist.sys.bt.unsupported.states", "")
                     }
                 }
+            }
+            MiscSettings.simSlots -> {
+                val value = sp.getString(key, "-1").toInt()
+                SystemProperties.set("persist.sys.phh.sim_slots", value.toString())
             }
             MiscSettings.displayFps -> {
                 val thisModeIndex = sp.getString(key, "-1").toInt()
@@ -242,6 +241,10 @@ object Misc: EntryStartup {
                 val value = sp.getBoolean(key, false)
                 SystemProperties.set("persist.sys.phh.restart_ril", if (value) "true" else "false")
             }
+            MiscSettings.patchSmsc -> {
+                val value = sp.getBoolean(key, true)
+                SystemProperties.set("persist.sys.phh.patch_smsc", if (value) "true" else "false")
+            }
             MiscSettings.minimalBrightness -> {
                 val value = sp.getBoolean(key, false)
                 SystemProperties.set("persist.sys.overlay.minimal_brightness", if (value) "true" else "false")
@@ -298,6 +301,58 @@ object Misc: EntryStartup {
                 val value = sp.getBoolean(key, false)
                 SystemProperties.set("persist.sys.phh.allow_binder_thread_on_incoming_calls", if(value) "1" else "0")
             }
+	        MiscSettings.statusbarpaddingtop -> {
+                val value = sp.getString(key, "-1").toInt()
+                if(value != -1) {
+                SystemProperties.set("persist.sys.phh.status_bar_padding_top", value.toString())
+                } else {
+                    SystemProperties.set("persist.sys.phh.status_bar_padding_top", null)
+                }
+            }
+            MiscSettings.statusbarpaddingstart -> {
+                val value = sp.getString(key, "-1").toInt()
+                if(value != -1) {
+                SystemProperties.set("persist.sys.phh.status_bar_padding_start", value.toString())
+                } else {
+                    SystemProperties.set("persist.sys.phh.status_bar_padding_start", null)
+                }
+            }
+            MiscSettings.statusbarpaddingend -> {
+                val value = sp.getString(key, "-1").toInt()
+                if(value != -1) {
+                SystemProperties.set("persist.sys.phh.status_bar_padding_end", value.toString())
+                } else {
+                    SystemProperties.set("persist.sys.phh.status_bar_padding_end", null)
+                }
+            }
+            MiscSettings.statusbarpaddingbottom -> {
+                val value = sp.getString(key, "-1").toInt()
+                if(value != -1) {
+                SystemProperties.set("persist.sys.phh.status_bar_padding_bottom", value.toString())
+                } else {
+                    SystemProperties.set("persist.sys.phh.status_bar_padding_bottom", null)
+                }
+            }
+            MiscSettings.qsclockleftpadding -> {
+                val value = sp.getString(key, "-1").toInt()
+                if(value != -1) {
+                    SystemProperties.set("persist.sys.phh.qs_clock_left_padding", value.toString())
+                } else {
+                    SystemProperties.set("persist.sys.phh.qs_clock_left_padding", null)
+                }
+            }
+            MiscSettings.qsclockrightpadding -> {
+                val value = sp.getString(key, "-1").toInt()
+                if(value != -1) {
+                    SystemProperties.set("persist.sys.phh.qs_clock_right_padding", value.toString())
+                } else {
+                    SystemProperties.set("persist.sys.phh.qs_clock_right_padding", null)
+                }
+            }
+            MiscSettings.brightenScreenFaceUnlock -> {
+                val value = sp.getBoolean(key, false)
+                SystemProperties.set("persist.sys.phh.brighten_screen_face_unlock", if (value) "true" else "false")
+            }
             MiscSettings.lowGammaBrightness -> {
                 val value = sp.getBoolean(key, false)
                 SystemProperties.set("persist.sys.phh.low_gamma_brightness", if (value) "true" else "false")
@@ -339,6 +394,14 @@ object Misc: EntryStartup {
             MiscSettings.secureAdb -> {
                 val value = sp.getBoolean(key, false)
                 SystemProperties.set("persist.sys.phh.adb_secure", if (value) "1" else "0")
+            }
+            MiscSettings.disableLeApcfExtended -> {
+                val value = sp.getBoolean(key, false)
+                SystemProperties.set("persist.sys.bt.le.disable_apcf_extended_features", if (value) "1" else "0")
+            }
+            MiscSettings.treatVirtualSensorsAsReal -> {
+                val value = sp.getBoolean(key, false)
+                SystemProperties.set("persist.sys.phh.virtual_sensors_are_real", if (value) "1" else "0")
             }
         }
     }
