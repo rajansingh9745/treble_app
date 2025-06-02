@@ -72,10 +72,6 @@ class Samsung: EntryStartup {
                 val value = if(sp.getBoolean(key, false)) "1" else " 0"
                 SystemProperties.set("persist.sys.phh.samsung_fingerprint", value)
             }
-            SamsungSettings.restore5G -> {
-                val value = if(sp.getBoolean(key, false)) "1" else " 0"
-                SystemProperties.set("persist.sys.phh.force_restore_5g", value)
-            }
             SamsungSettings.backlightMultiplier -> {
                 val value = sp.getString(key, "-1")
                 SystemProperties.set("persist.sys.phh.samsung_backlight", value)

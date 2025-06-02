@@ -141,9 +141,16 @@ object Misc: EntryStartup {
             MiscSettings.roundedCorners -> {
                 val value = sp.getString(key, "-1").toInt()
                 if (value >= 0) {
+                    Settings.Secure.putInt(c.contentResolver, "sysui_rounded_content_padding", value)
                     SystemProperties.set("persist.sys.phh.rounded_corners_padding", value.toString())
 		} else {
                     SystemProperties.set("persist.sys.phh.rounded_corners_padding", null)
+                }
+            }
+            MiscSettings.roundedCornersOverlay -> {
+                val value = sp.getString(key, "-1").toFloat()
+                if (value >= 0) {
+                    Settings.Secure.putFloat(c.contentResolver, "sysui_rounded_size", value)
                 }
             }
             MiscSettings.disableButtonsBacklight -> {
@@ -203,10 +210,6 @@ object Misc: EntryStartup {
             MiscSettings.dynamicFps -> {
                 val value = sp.getBoolean(key, false)
                 SystemProperties.set("persist.sys.phh.dynamic_fps", if (value) "1" else "0")
-            }
-            MiscSettings.remotectl -> {
-                val value = sp.getBoolean(key, false)
-                SystemProperties.set("persist.sys.phh.remote", if (value) "true" else "false")
             }
             MiscSettings.disableAudioEffects -> {
                 val value = sp.getBoolean(key, false)
@@ -301,7 +304,7 @@ object Misc: EntryStartup {
                 val value = sp.getBoolean(key, false)
                 SystemProperties.set("persist.sys.phh.allow_binder_thread_on_incoming_calls", if(value) "1" else "0")
             }
-	        MiscSettings.statusbarpaddingtop -> {
+            MiscSettings.statusbarpaddingtop -> {
                 val value = sp.getString(key, "-1").toInt()
                 if(value != -1) {
                 SystemProperties.set("persist.sys.phh.status_bar_padding_top", value.toString())
@@ -349,10 +352,6 @@ object Misc: EntryStartup {
                     SystemProperties.set("persist.sys.phh.qs_clock_right_padding", null)
                 }
             }
-            MiscSettings.brightenScreenFaceUnlock -> {
-                val value = sp.getBoolean(key, false)
-                SystemProperties.set("persist.sys.phh.brighten_screen_face_unlock", if (value) "true" else "false")
-            }
             MiscSettings.lowGammaBrightness -> {
                 val value = sp.getBoolean(key, false)
                 SystemProperties.set("persist.sys.phh.low_gamma_brightness", if (value) "true" else "false")
@@ -391,6 +390,10 @@ object Misc: EntryStartup {
                 val value = sp.getString(key, "0")
                 SystemProperties.set("persist.sys.bt.esco_transport_unit_size", value)
             }
+            MiscSettings.securize -> {
+                val value = sp.getBoolean(key, false)
+                SystemProperties.set("persist.sys.phh.securize", if (value) "1" else "0")
+            }
             MiscSettings.secureAdb -> {
                 val value = sp.getBoolean(key, false)
                 SystemProperties.set("persist.sys.phh.adb_secure", if (value) "1" else "0")
@@ -398,10 +401,6 @@ object Misc: EntryStartup {
             MiscSettings.disableLeApcfExtended -> {
                 val value = sp.getBoolean(key, false)
                 SystemProperties.set("persist.sys.bt.le.disable_apcf_extended_features", if (value) "1" else "0")
-            }
-            MiscSettings.treatVirtualSensorsAsReal -> {
-                val value = sp.getBoolean(key, false)
-                SystemProperties.set("persist.sys.phh.virtual_sensors_are_real", if (value) "1" else "0")
             }
         }
     }

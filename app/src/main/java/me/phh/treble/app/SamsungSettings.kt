@@ -9,7 +9,6 @@ object SamsungSettings : Settings {
     val extraSensors = "key_samsung_extra_sensors"
     val colorspace = "key_samsung_colorspace"
     val brokenFingerprint = "key_samsung_broken_fingerprint"
-    val restore5G = "key_samsung_force_restore_5g"
     val backlightMultiplier = "key_samsung_backlight_multiplier"
     val cameraIds = "key_samsung_camera_ids"
     val alternateAudioPolicy = "key_samsung_alternate_audio_policy"

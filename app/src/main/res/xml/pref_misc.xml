@@ -40,47 +40,47 @@
             android:title="Set rounded corners diameter"
             android:inputType="number"
             android:summary="Requires a reboot" />
-		<EditTextPreference
-			android:defaultValue="-1"
-			android:key="key_misc_sb_padding_top"
-			android:title="Set status bar top padding"
-			android:inputType="number"
-			android:summary="Requires a SystemUI restart" />
-		<EditTextPreference
-			android:defaultValue="-1"
-			android:key="key_misc_sb_padding_start"
-			android:title="Set status bar start padding"
-			android:inputType="number"
-			android:summary="Requires a SystemUI restart" />
-		<EditTextPreference
-			android:defaultValue="-1"
-			android:key="key_misc_sb_padding_end"
-			android:title="Set status bar end padding"
-			android:inputType="number"
-			android:summary="Requires a SystemUI restart" />
         <EditTextPreference
-			android:defaultValue="-1"
-			android:key="key_misc_sb_padding_bottom"
-			android:title="Set status bar bottom padding"
-			android:inputType="number"
-			android:summary="Requires a SystemUI restart" />
+            android:defaultValue="-1"
+            android:key="key_misc_rounded_corners_overlay"
+            android:title="Set forced/faked rounded corners diameter"
+            android:inputType="number" />
         <EditTextPreference
-			android:defaultValue="-1"
-			android:key="key_misc_qs_clock_left_padding"
-			android:title="Set quick settings clock left padding"
-			android:inputType="number"
-			android:summary="Requires a SystemUI restart" />
+            android:defaultValue="-1"
+            android:key="key_misc_sb_padding_top"
+            android:title="Set status bar top padding"
+            android:inputType="number"
+            android:summary="Requires a SystemUI restart" />
         <EditTextPreference
-			android:defaultValue="-1"
-			android:key="key_misc_qs_clock_right_padding"
-			android:title="Set quick settings clock right padding"
-			android:inputType="number"
-			android:summary="Requires a SystemUI restart" />
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="key_misc_brighten_screen_face_unlock"
-            android:title="Brighten screen on Face Unlock"
-            android:summary="Brightens up the display to maximum when attempting to unlock the phone. Only applicable if using Face Unlock."/>
+            android:defaultValue="-1"
+            android:key="key_misc_sb_padding_start"
+            android:title="Set status bar start padding"
+            android:inputType="number"
+            android:summary="Requires a SystemUI restart" />
+        <EditTextPreference
+            android:defaultValue="-1"
+            android:key="key_misc_sb_padding_end"
+            android:title="Set status bar end padding"
+            android:inputType="number"
+            android:summary="Requires a SystemUI restart" />
+        <EditTextPreference
+            android:defaultValue="-1"
+            android:key="key_misc_sb_padding_bottom"
+            android:title="Set status bar bottom padding"
+            android:inputType="number"
+            android:summary="Requires a SystemUI restart" />
+        <EditTextPreference
+            android:defaultValue="-1"
+            android:key="key_misc_qs_clock_left_padding"
+            android:title="Set quick settings clock left padding"
+            android:inputType="number"
+            android:summary="Requires a SystemUI restart" />
+        <EditTextPreference
+            android:defaultValue="-1"
+            android:key="key_misc_qs_clock_right_padding"
+            android:title="Set quick settings clock right padding"
+            android:inputType="number"
+            android:summary="Requires a SystemUI restart" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Display">
         <ListPreference
@@ -259,15 +259,15 @@
             android:key="key_misc_fod_color"
             android:title="Under-display fp color" />
         <SwitchPreference
+            android:defaultValue="true"
+            android:key="key_misc_securize"
+            android:title="Enable Securize"
+            android:summary="Disabling may fix play services on uncertified devices" />
+        <SwitchPreference
             android:defaultValue="false"
             android:key="key_misc_secure_adb"
             android:title="Secure adb"
             android:summary="Computer requires approval" />
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="key_misc_treat_virtual_sensors_as_real"
-            android:title="Treat virtual sensors as real"
-            android:summary="Treat all virtual fingerprint sensors as real\nWarning: This can cause bootloops - use with extreme care\nRequires a reboot" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Debugging">
         <Preference android:title="Debug Sensors">
@@ -276,9 +276,5 @@
                 android:targetPackage="me.phh.treble.app"
                 android:targetClass="me.phh.treble.app.DebugSensors" />
         </Preference>
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="key_misc_remotectl"
-            android:title="Allow takeover of the device by phh for debugging" />
     </PreferenceCategory>
 </PreferenceScreen>
